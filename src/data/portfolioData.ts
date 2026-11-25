@@ -7,75 +7,107 @@
 
 /* ───────────── 1. BASIC INFO ───────────── */
 export const SITE = {
-  name: 'Your Name', // shown in navbar, footer, hero, about
-  pageTitle: 'Your Name – Your Role', // browser tab title
-  role: 'Your Role', // footer subtitle
-  email: 'you@example.com',
-  // digits only, with country code, no + or spaces (e.g. 919876543210)
-  phone: '910000000000',
-  whatsappMessage: 'Hi, I visited your portfolio and would like to get in touch.',
+  name: 'BALAMURUGAN V',
+  pageTitle: 'BALAMURUGAN V – Aspiring Python Full Stack Developer',
+  role: 'ASPIRING PYTHON FULL STACK DEVELOPER',
+  email: 'itsmebalamurugan07@gmail.com',
+  // digits only: 7339493301
+  phone: '7339493301',
+  whatsappMessage: 'Hi Balamurugan, I visited your portfolio and would like to get in touch.',
   available: true,
 };
 
 /* ───────────── 2. HERO (top of page) ───────────── */
 export const HERO = {
-  eyebrow: 'YOUR PROFESSION • YOUR SPECIALITY',
-  headline: 'YOUR NAME', // big text, use CAPS
-  roles: ['YOUR ROLE ONE', 'YOUR ROLE TWO'] as [string, string],
-  tagline: 'One sentence about what you do and the value you bring.',
+  eyebrow: 'ASPIRING PYTHON FULL STACK DEVELOPER • PYTHON & DJANGO DEVELOPMENT',
+  headline: 'BALAMURUGAN V',
+  roles: ['PYTHON FULL STACK DEVELOPER', 'DJANGO DEVELOPER'] as [string, string],
+  tagline:
+    'Aspiring Full Stack Python Developer with knowledge in front-end and back-end technologies, interested in building real-world applications and improving skills.',
   primaryButton: 'EXPLORE MY WORK',
   secondaryButton: 'Get In Touch',
-  image: '/assets/hero-red-bg.jpg', // 1920x1080, subject on the RIGHT side
-  imageAlt: 'Portrait of Your Name',
-  imagePosition: '69% center', // CSS object-position fallback
+  image: '/assets/hero-red-bg.jpg',
+  imageAlt: 'Portrait of BALAMURUGAN V',
+  imagePosition: '69% center',
+  photo: '/media/profile.png',
 };
 
 /* ───────────── 3. LOADING SCREEN ───────────── */
 export const LOADER = {
-  statement: 'YOUR ONE LINE STATEMENT GOES RIGHT HERE',
-  redWords: ['STATEMENT', 'HERE'], // words highlighted in red
+  statement: 'ASPIRING PYTHON FULL STACK DEVELOPER',
+  redWords: ['FULL', 'STACK', 'DEVELOPER'],
 };
 
 /* ───────────── 4. ABOUT ───────────── */
 export const ABOUT = {
-  eyebrow: 'Your Role · Your Field · Your Strength',
-  portrait: '/media/profile.webp', // 4:5 portrait photo
-  portraitAlt: 'Portrait of Your Name',
-  portraitCaption: 'Your Title', // small red text under the name on the photo
+  eyebrow: 'Python · Django · Full Stack Development',
+  portrait: '/media/profile.png',
+  portraitAlt: 'Portrait of BALAMURUGAN V',
+  portraitCaption: 'Aspiring Python Full Stack Developer',
   paragraphs: [
-    'First paragraph: who you are and what you do, in one or two sentences.',
-    'Second paragraph: what you care about, how you work, or what you are looking for.',
+    'Aspiring Full Stack Python Developer with knowledge in front-end and back-end technologies. Interested in building real-world web applications, improving technical skills and contributing to an organization.',
+    'I have developed projects using Python and Django and gained React.js development experience through internship work.',
   ],
-  technologies: ['Skill One', 'Skill Two', 'Skill Three', 'Skill Four', 'Skill Five', 'Skill Six'],
-  focus: ['Focus Area One', 'Focus Area Two', 'Focus Area Three'],
+  technologies: [
+    'Python',
+    'Django',
+    'HTML',
+    'CSS',
+    'Bootstrap',
+    'JavaScript',
+    'React.js',
+    'MySQL',
+    'SQLite',
+    'Git',
+    'GitHub',
+  ],
+  focus: ['Python Development', 'Django Web Applications', 'Full Stack Development'],
 };
 
 /* ───────────── 5. SOCIAL LINKS (footer) ───────────── */
 export const SOCIALS = [
-  { id: 'github', label: 'GitHub', href: 'https://github.com/your-username' },
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/your-username' },
+  { id: 'github', label: 'GitHub', href: 'https://github.com/BALAMURUGAN0717' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/balamurugan-v07' },
 ] as const;
 
-/* ───────────── 6. TECHNICAL SKILLS (6 cards look best) ───────────── */
-export const SKILL_CARDS: { name: string; category: string; level: string }[] = [
-  { name: 'Skill One', category: 'Tool A · Tool B', level: 'Advanced' },
-  { name: 'Skill Two', category: 'Tool A · Tool B', level: 'Advanced' },
-  { name: 'Skill Three', category: 'Tool A · Tool B', level: 'Proficient' },
-  { name: 'Skill Four', category: 'Tool A · Tool B', level: 'Proficient' },
-  { name: 'Skill Five', category: 'Tool A · Tool B', level: 'Proficient' },
-  { name: 'Skill Six', category: 'Tool A · Tool B', level: 'Proficient' },
+/* ───────────── 6. TECHNICAL SKILLS ───────────── */
+export interface SkillCard {
+  name: string;
+  category: string;
+  level?: string;
+}
+
+export const SKILL_CARDS: SkillCard[] = [
+  { name: 'Python', category: 'Backend Development' },
+  { name: 'Django', category: 'Web Framework' },
+  { name: 'HTML', category: 'Frontend Markup' },
+  { name: 'CSS', category: 'Frontend Styling' },
+  { name: 'Bootstrap', category: 'CSS Framework' },
+  { name: 'JavaScript', category: 'Programming Language' },
+  { name: 'React.js (Basic)', category: 'Frontend Library' },
+  { name: 'MySQL', category: 'Relational Database' },
+  { name: 'SQLite', category: 'Database Engine' },
+  { name: 'Git', category: 'Version Control' },
+  { name: 'GitHub', category: 'Code Collaboration' },
 ];
 
-/* ───────────── 6b. TECH STACK STRIP (logos under the skills) ─────────────
- * Use names with a built-in logo: React, JavaScript, Python, FastAPI, PostgreSQL,
- * Supabase, SQLite, Three.js, GSAP. Any other name still shows as a lettered badge. */
-export const TECH_STACK: string[] = ['React', 'JavaScript', 'Python', 'PostgreSQL', 'Three.js', 'GSAP'];
+/* ───────────── 6b. TECH STACK STRIP (logos under the skills) ───────────── */
+export const TECH_STACK: string[] = [
+  'Python',
+  'Django',
+  'HTML',
+  'CSS',
+  'Bootstrap',
+  'JavaScript',
+  'React.js',
+  'MySQL',
+  'SQLite',
+  'Git',
+  'GitHub',
+  'VS Code',
+];
 
-/* ───────────── 7. PROJECTS ─────────────
- * Thumbnails: put project-<n>-1.jpg, -2.jpg, -3.jpg in /public/assets/thumbnails/
- * (card cycles through 1-3). Set poster to the "-1.jpg" file.
- * Add liveUrl / repoUrl to show "View Live" / "View Code" buttons.
- * 6 or 9 projects fill the 3D grid best. */
+/* ───────────── 7. PROJECTS ───────────── */
 export interface Project {
   id: string;
   title: string;
@@ -94,84 +126,68 @@ export interface Project {
 
 export const PORTFOLIO_PROJECTS: Project[] = [
   {
-    id: 'project-one',
+    id: 'shopkart',
     kind: 'software',
-    title: 'Project One',
-    subtitle: 'One-line subtitle',
-    category: 'Category One',
+    title: 'ShopKart – E-Commerce Web Application',
+    subtitle: 'Python & Django Web Application',
+    category: 'Full Stack / Django',
     poster: '/assets/thumbnails/project-1-1.jpg',
-    description: 'Two sentences about what this project does, who it is for and what you did.',
-    tags: ['Tag One', 'Tag Two', 'Tag Three'],
-    // liveUrl: 'https://example.com',
-    // repoUrl: 'https://github.com/your-username/project-one',
+    description: 'Developed a full-stack e-commerce web application using Python and Django.',
+    tags: ['Python', 'Django', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'SQLite'],
+    liveUrl: 'https://django-shopkart-okg4.vercel.app/',
   },
   {
-    id: 'project-two',
+    id: 'harry-the-chicken',
     kind: 'software',
-    title: 'Project Two',
-    subtitle: 'One-line subtitle',
-    category: 'Category Two',
+    title: 'Harry the Chicken – E-Commerce Web Application',
+    subtitle: 'Python & Django Web Application',
+    category: 'Full Stack / Django',
     poster: '/assets/thumbnails/project-2-1.jpg',
-    description: 'Two sentences about what this project does, who it is for and what you did.',
-    tags: ['Tag One', 'Tag Two', 'Tag Three'],
+    description: 'Developed a full-stack e-commerce web application using Python and Django.',
+    tags: ['Python', 'Django', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'SQLite'],
+    liveUrl: 'https://chickenproject-beige.vercel.app/',
   },
   {
-    id: 'project-three',
+    id: 'portfolio-website',
     kind: 'software',
-    title: 'Project Three',
-    subtitle: 'One-line subtitle',
-    category: 'Category One',
+    title: 'Portfolio Website',
+    subtitle: 'Responsive Web Design',
+    category: 'Frontend Development',
     poster: '/assets/thumbnails/project-3-1.jpg',
-    description: 'Two sentences about what this project does, who it is for and what you did.',
-    tags: ['Tag One', 'Tag Two', 'Tag Three'],
+    description:
+      'Developed a responsive portfolio website using HTML, CSS, Bootstrap and JavaScript with responsive layouts for mobile and desktop.',
+    tags: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
   },
   {
-    id: 'project-four',
+    id: 'javascript-calculator',
     kind: 'software',
-    title: 'Project Four',
-    subtitle: 'One-line subtitle',
-    category: 'Category Two',
+    title: 'JavaScript Calculator',
+    subtitle: 'Interactive Calculation Utility',
+    category: 'JavaScript Web App',
     poster: '/assets/thumbnails/project-4-1.jpg',
-    description: 'Two sentences about what this project does, who it is for and what you did.',
-    tags: ['Tag One', 'Tag Two', 'Tag Three'],
-  },
-  {
-    id: 'project-five',
-    kind: 'software',
-    title: 'Project Five',
-    subtitle: 'One-line subtitle',
-    category: 'Category One',
-    poster: '/assets/thumbnails/project-5-1.jpg',
-    description: 'Two sentences about what this project does, who it is for and what you did.',
-    tags: ['Tag One', 'Tag Two', 'Tag Three'],
-  },
-  {
-    id: 'project-six',
-    kind: 'software',
-    title: 'Project Six',
-    subtitle: 'One-line subtitle',
-    category: 'Category Two',
-    poster: '/assets/thumbnails/project-6-1.jpg',
-    description: 'Two sentences about what this project does, who it is for and what you did.',
-    tags: ['Tag One', 'Tag Two', 'Tag Three'],
+    description:
+      'Developed a calculator using HTML, CSS and JavaScript with interactive buttons and a dynamic display. Implemented real-time calculation logic.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
   },
 ];
 
 /* ───────────── 8. SERVICES & PRICING ───────────── */
-export const SERVICES_PRICING = [
-  { id: 'service-1', title: 'Service One', priceLabel: 'Starts from', price: '₹0,000', featured: true },
-  { id: 'service-2', title: 'Service Two', priceLabel: 'Starts from', price: '₹0,000', featured: false },
-  { id: 'service-3', title: 'Service Three', priceLabel: 'From – to', price: '₹0,000 – ₹0,000', featured: false },
-  { id: 'service-4', title: 'Service Four', priceLabel: 'From – to', price: '₹0,000 – ₹0,000', featured: false },
-  { id: 'service-5', title: 'Service Five', priceLabel: 'From – to', price: '₹0,000 – ₹0,000', featured: false },
-] as const;
+export interface ServiceItem {
+  id: string;
+  title: string;
+  priceLabel?: string;
+  price?: string;
+  featured?: boolean;
+}
+
+export const SERVICES_PRICING: ServiceItem[] = [];
 
 /* ───────────── 9. HEADLINE NUMBERS (under hero) ───────────── */
 export const CLIENT_STATS = [
-  { id: 'stat-1', value: 10, suffix: '+', label: 'Stat One' },
-  { id: 'stat-2', value: 5, suffix: '+', label: 'Stat Two' },
-  { id: 'stat-3', value: 3, suffix: '+', label: 'Stat Three' },
+  { id: 'stat-1', value: 4, suffix: '', label: 'Projects Built' },
+  { id: 'stat-2', value: 11, suffix: '+', label: 'Tech Stack Skills' },
+  { id: 'stat-3', value: 2, suffix: '', label: 'Live Deployed Apps' },
 ] as const;
 
 /* Derived – do not edit */
-export const WHATSAPP_URL = `https://wa.me/${SITE.phone}?text=${encodeURIComponent(SITE.whatsappMessage)}`;
+export const WHATSAPP_URL = `https://wa.me/91${SITE.phone}?text=${encodeURIComponent(SITE.whatsappMessage)}`;

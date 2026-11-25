@@ -13,13 +13,14 @@ export const Skills: React.FC = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Entrance timeline - snappy 0.5s pop
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-      })
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        })
         .fromTo(titleRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' })
         .fromTo(
           '.matrix-item',
@@ -27,8 +28,6 @@ export const Skills: React.FC = () => {
           { y: 0, opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'back.out(1.4)' },
           '-=0.2'
         );
-
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -47,9 +46,7 @@ export const Skills: React.FC = () => {
         <span className="text-[#a31515] font-bold uppercase text-sm md:text-base tracking-[0.2em] mb-2">
           What I Work With
         </span>
-        <h2
-          className="text-5xl md:text-7xl font-black tracking-tight uppercase text-white"
-        >
+        <h2 className="text-5xl md:text-7xl font-black tracking-tight uppercase text-white">
           TECHNICAL SKILLS.
         </h2>
         <div className="w-20 h-1.5 bg-[#a31515] mt-3 rounded-full" />
@@ -59,26 +56,30 @@ export const Skills: React.FC = () => {
       <div className="relative w-full max-w-6xl z-10">
         <div className="red-halo" aria-hidden="true" />
         <div className="grid-blur relative grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-7">
-        {skillsData.map((skill) => (
-          <div
-            key={skill.name}
-            className="matrix-item glass glass-grid-card group p-6 md:p-8 rounded-3xl flex items-center justify-between gap-4"
-          >
-            <div className="flex items-center gap-4 md:gap-5 min-w-0">
-              <div className="min-w-0">
-                <h3 className="font-bold text-lg md:text-2xl text-gray-100 group-hover:text-[#a31515] transition-colors">
-                  {skill.name}
-                </h3>
-                <span className="text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                  {skill.category}
-                </span>
+          {skillsData.map((skill) => (
+            <div
+              key={skill.name}
+              className="matrix-item glass glass-grid-card group p-6 md:p-8 rounded-3xl flex items-center justify-between gap-4"
+            >
+              <div className="flex items-center gap-4 md:gap-5 min-w-0">
+                <div className="min-w-0">
+                  <h3 className="font-bold text-lg md:text-2xl text-gray-100 group-hover:text-[#a31515] transition-colors">
+                    {skill.name}
+                  </h3>
+                  {skill.category && (
+                    <span className="text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                      {skill.category}
+                    </span>
+                  )}
+                </div>
               </div>
+              {skill.level && (
+                <span className="glass-chip text-xs md:text-sm font-black uppercase tracking-wider px-4 py-1.5 text-gray-200 shrink-0 group-hover:text-white rounded-full">
+                  {skill.level}
+                </span>
+              )}
             </div>
-            <span className="glass-chip text-xs md:text-sm font-black uppercase tracking-wider px-4 py-1.5 text-gray-200 shrink-0 group-hover:text-white rounded-full">
-              {skill.level}
-            </span>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
 

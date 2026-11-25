@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { gsap } from 'gsap';
 import { VenomButton } from './VenomButton';
-import { HERO } from '../data/portfolioData';
+import { HERO, SITE } from '../data/portfolioData';
 import {
   BREATHING_VERTICES,
   SHARD_POLYGONS,
@@ -604,32 +604,68 @@ export const Hero: React.FC = () => {
               : { transformOrigin: '50% 50%' }
           }
         >
-          <div className="pl-[6%] pr-6 max-w-[min(44rem,92%)] max-md:max-w-full max-md:pl-3 max-md:pr-3 max-md:pb-1 max-md:w-full max-md:rounded-3xl max-md:bg-gradient-to-t max-md:from-[#050507]/90 max-md:via-[#050507]/55 max-md:to-transparent max-md:pt-4">
-            <div data-hero-copy className="flex flex-col gap-2 sm:gap-3.5">
-              <span className="text-[#ff2a3b] font-bold uppercase text-[11px] sm:text-xs md:text-sm tracking-[0.25em]">
-                {HERO.eyebrow}
-              </span>
-              <h1 className="text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight leading-[0.88] uppercase drop-shadow-md">
-                {HERO.headline}
-              </h1>
-              <div className="flex items-center gap-2 sm:gap-3 text-white font-extrabold text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-wider mt-0.5">
-                <span>{HERO.roles[0]}</span>
-                <span className="text-[#ff2a3b] font-bold">/</span>
-                <span>{HERO.roles[1]}</span>
+          <div className="w-full h-full px-5 sm:px-8 md:px-10 lg:px-14 flex items-center max-md:items-end">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-center w-full max-md:rounded-3xl max-md:bg-gradient-to-t max-md:from-[#050507]/90 max-md:via-[#050507]/55 max-md:to-transparent max-md:p-4 max-md:pb-2">
+              {/* Left Column: Text Content */}
+              <div className="md:col-span-7 flex flex-col justify-center min-w-0">
+                <div data-hero-copy className="flex flex-col gap-2.5 sm:gap-3.5">
+                  <span className="text-[#ff2a3b] font-bold uppercase text-[11px] sm:text-xs md:text-sm tracking-[0.25em]">
+                    {HERO.eyebrow}
+                  </span>
+                  <h1
+                    className="text-white font-black tracking-tight leading-none uppercase drop-shadow-md whitespace-nowrap"
+                    style={{
+                      fontSize: 'clamp(1.5rem, 3.4vw, 3.6rem)',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {HERO.headline}
+                  </h1>
+                  <div className="flex items-center gap-2 sm:gap-3 text-white font-extrabold text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider mt-0.5">
+                    <span>{HERO.roles[0]}</span>
+                    <span className="text-[#ff2a3b] font-bold">/</span>
+                    <span>{HERO.roles[1]}</span>
+                  </div>
+                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-normal tracking-wide leading-relaxed max-w-xl mt-1">
+                    {HERO.tagline}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3 sm:mt-5">
+                    <VenomButton href="#projects" variant="primary">
+                      {HERO.primaryButton}
+                    </VenomButton>
+                    <a
+                      href="#contact"
+                      className="glass glass-hover inline-flex items-center justify-center px-5 py-3 sm:px-7 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-200 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      {HERO.secondaryButton}
+                    </a>
+                  </div>
+                </div>
               </div>
-              <p className="text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-normal tracking-wide mt-1">
-                {HERO.tagline}
-              </p>
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3 sm:mt-6">
-                <VenomButton href="#projects" variant="primary">
-                  {HERO.primaryButton}
-                </VenomButton>
-                <a
-                  href="#contact"
-                  className="glass glass-hover inline-flex items-center justify-center px-5 py-3 sm:px-7 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-200 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+
+              {/* Right Column: Dedicated Photo Area */}
+              <div className="hidden md:flex md:col-span-5 justify-center lg:justify-end items-center pointer-events-auto min-w-0">
+                <div
+                  data-hero-copy
+                  className="relative w-full max-w-[270px] lg:max-w-[320px] xl:max-w-[350px] aspect-[4/5] rounded-3xl overflow-hidden glass glass-panel-card p-2 border border-white/10 shadow-[0_0_40px_rgba(220,38,38,0.22)] group transition-all duration-500 hover:shadow-[0_0_55px_rgba(220,38,38,0.38)]"
                 >
-                  {HERO.secondaryButton}
-                </a>
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/60">
+                    <img
+                      src={HERO.photo || '/media/profile.png'}
+                      alt={HERO.imageAlt}
+                      className="w-full h-full object-contain object-bottom transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-3.5 left-4 right-4 text-left pointer-events-none">
+                      <span className="text-white text-sm md:text-base font-black uppercase tracking-wider block">
+                        {SITE.name}
+                      </span>
+                      <span className="text-red-400 text-[10px] md:text-xs uppercase font-bold tracking-widest block">
+                        {HERO.roles[0]}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

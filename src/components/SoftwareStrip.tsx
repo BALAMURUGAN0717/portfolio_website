@@ -3,8 +3,18 @@ import { TECH_ICONS } from './techIcons';
 import { TECH_STACK } from '../data/portfolioData';
 
 const TOOLS = TECH_STACK.map((label) => {
-  const icon = TECH_ICONS.find((i) => i.label.toLowerCase() === label.toLowerCase());
-  return { label, color: icon?.color ?? '#ff2a3b', path: icon?.path ?? '' };
+  const icon = TECH_ICONS.find(
+    (i) =>
+      i.label.toLowerCase() === label.toLowerCase() ||
+      (label.toLowerCase() === 'react.js' && i.label.toLowerCase() === 'react') ||
+      (label.toLowerCase() === 'vs code' && (i.label.toLowerCase() === 'vscode' || i.label.toLowerCase() === 'vs code'))
+  );
+  return {
+    label,
+    color: icon?.color ?? '#ff2a3b',
+    path: icon?.path ?? '',
+    viewBox: icon?.viewBox ?? '0 0 24 24',
+  };
 });
 
 /** Software & tools shown as tall capsules (logo on top, name below). Edit TECH_STACK in src/data/portfolioData.ts. */
@@ -25,7 +35,7 @@ export const SoftwareStrip: React.FC = () => (
           className="matrix-item glass glass-grid-card group w-[132px] h-[190px] md:w-[148px] md:h-[216px] xl:w-[152px] xl:h-[224px] rounded-3xl flex flex-col items-center justify-center gap-5 px-2"
         >
           <svg
-            viewBox="0 0 24 24"
+            viewBox={tool.viewBox}
             role="img"
             aria-label={tool.label}
             className="shrink-0 w-14 h-14 md:w-16 md:h-16 transition-transform duration-300 group-hover:scale-110"

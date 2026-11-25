@@ -13,23 +13,25 @@ export const Services: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
-          },
-        })
-        .fromTo(titleRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' })
-        .fromTo(
-          '.service-item',
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      tl.fromTo(titleRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' });
+
+      const items = sectionRef.current?.querySelectorAll('.service-item');
+      if (items && items.length > 0) {
+        tl.fromTo(
+          items,
           { y: 25, opacity: 0, x: -10 },
           { y: 0, opacity: 1, x: 0, duration: 0.45, stagger: 0.07, ease: 'back.out(1.4)' },
           '-=0.2'
         );
-
-
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -47,69 +49,83 @@ export const Services: React.FC = () => {
           <img src="/assets/icon.svg" alt="" aria-hidden="true" className="w-4 h-4 object-contain" />
           What I Do
         </span>
-        <h2
-          className="text-3xl md:text-5xl font-black tracking-tight uppercase text-white"
-        >
+        <h2 className="text-3xl md:text-5xl font-black tracking-tight uppercase text-white">
           SERVICES &amp; PRICING.
         </h2>
         <div className="w-12 h-1 bg-[#a31515] mt-2 rounded-full" />
       </div>
 
-      {/* Service cards: glass rows, service on the left, price chip + action on the right */}
-      <ul ref={listRef} className="grid-blur relative list-none p-0 m-0 w-full max-w-4xl grid grid-cols-2 gap-3 md:flex md:flex-col md:gap-4 z-10">
-        {SERVICES_PRICING.map((service, i) => {
-          const featured = 'featured' in service && service.featured;
-          return (
-            <li key={service.id} className="service-item">
-              <a
-                href="#contact"
-                className="glass glass-grid-card group relative flex h-full flex-col items-start gap-3 p-4 md:flex-row md:items-center md:gap-6 md:p-5 rounded-3xl outline-none"
-              >
-                {/* Index */}
-                <span className="glass-chip shrink-0 w-7 h-7 md:w-11 md:h-11 rounded-full flex items-center justify-center text-[10px] md:text-sm font-black tabular-nums text-gray-200 group-hover:text-white">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
-                {/* Name + price */}
-                <div className="flex-1 min-w-0 flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-6">
-                  <div className="min-w-0">
-                    <h3 className="font-bold text-sm md:text-xl text-gray-100 group-hover:text-[#ff334b] transition-colors">
-                      {service.title}
-                    </h3>
-                    {featured && (
-                      <span className="glass-chip-red inline-block mt-1.5 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full text-white">
-                        Specialty
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="md:text-right shrink-0">
-                    <span className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-1">
-                      {service.priceLabel}
-                    </span>
-                    <span className="glass-chip inline-block text-xs md:text-base font-black tabular-nums px-3 py-1 md:px-3.5 rounded-full text-gray-100 group-hover:text-white">
-                      {service.price}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Arrow */}
-                <span
-                  aria-hidden="true"
-                  className="glass-chip shrink-0 absolute right-3 top-3 w-8 h-8 md:static md:w-11 md:h-11 rounded-full flex items-center justify-center text-gray-300
-                    group-hover:[background-image:linear-gradient(145deg,rgba(255,51,75,0.6),rgba(163,21,21,0.45))]
-                    group-hover:border-[rgba(255,130,148,0.45)] group-hover:text-white"
+      {SERVICES_PRICING.length > 0 ? (
+        <ul
+          ref={listRef}
+          className="grid-blur relative list-none p-0 m-0 w-full max-w-4xl grid grid-cols-2 gap-3 md:flex md:flex-col md:gap-4 z-10"
+        >
+          {SERVICES_PRICING.map((service, i) => {
+            const featured = 'featured' in service && service.featured;
+            return (
+              <li key={service.id} className="service-item">
+                <a
+                  href="#contact"
+                  className="glass glass-grid-card group relative flex h-full flex-col items-start gap-3 p-4 md:flex-row md:items-center md:gap-6 md:p-5 rounded-3xl outline-none"
                 >
-                  <ArrowUpRight
-                    className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    strokeWidth={2}
-                  />
-                </span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+                  {/* Index */}
+                  <span className="glass-chip shrink-0 w-7 h-7 md:w-11 md:h-11 rounded-full flex items-center justify-center text-[10px] md:text-sm font-black tabular-nums text-gray-200 group-hover:text-white">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  {/* Name + price */}
+                  <div className="flex-1 min-w-0 flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-6">
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-sm md:text-xl text-gray-100 group-hover:text-[#ff334b] transition-colors">
+                        {service.title}
+                      </h3>
+                      {featured && (
+                        <span className="glass-chip-red inline-block mt-1.5 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full text-white">
+                          Specialty
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="md:text-right shrink-0">
+                      <span className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-1">
+                        {service.priceLabel}
+                      </span>
+                      <span className="glass-chip inline-block text-xs md:text-base font-black tabular-nums px-3 py-1 md:px-3.5 rounded-full text-gray-100 group-hover:text-white">
+                        {service.price}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <span
+                    aria-hidden="true"
+                    className="glass-chip shrink-0 absolute right-3 top-3 w-8 h-8 md:static md:w-11 md:h-11 rounded-full flex items-center justify-center text-gray-300
+                      group-hover:[background-image:linear-gradient(145deg,rgba(255,51,75,0.6),rgba(163,21,21,0.45))]
+                      group-hover:border-[rgba(255,130,148,0.45)] group-hover:text-white"
+                  >
+                    <ArrowUpRight
+                      className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      strokeWidth={2}
+                    />
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div className="glass glass-panel-card w-full max-w-4xl p-8 md:p-12 rounded-3xl text-center z-10 flex flex-col items-center gap-4">
+          <p className="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
+            Available for full-stack web development, custom Python &amp; Django applications, and responsive frontend projects. Get in touch to discuss your requirements.
+          </p>
+          <a
+            href="#contact"
+            className="glass-red inline-block px-6 py-2.5 rounded-full text-white text-xs font-bold uppercase tracking-wider"
+          >
+            Get In Touch
+          </a>
+        </div>
+      )}
 
       <p className="mt-8 w-full max-w-4xl text-center text-[11px] md:text-xs text-gray-500 leading-relaxed z-10">
         *Final pricing depends on features, complexity, timeline and project scope.

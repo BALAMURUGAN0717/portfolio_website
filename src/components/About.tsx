@@ -146,7 +146,7 @@ export const HangingPhoto: React.FC = () => {
               src={ABOUT.portrait}
               alt={ABOUT.portraitAlt}
               draggable={false}
-              className="w-full h-full object-cover object-top transition-all duration-700 select-none"
+              className="w-full h-full object-contain object-bottom transition-all duration-700 select-none"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
             <div className="hang-glare" aria-hidden="true" />
