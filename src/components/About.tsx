@@ -210,35 +210,35 @@ export const About: React.FC = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full text-gray-100 py-24 overflow-hidden border-t border-white/5"
+      className="relative w-full text-gray-100 py-16 sm:py-24 overflow-hidden border-t border-white/5"
     >
-      <div className="max-w-7xl mx-auto px-5 md:px-12 relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
         {/* Left column */}
-        <div className="lg:col-span-7 flex flex-col gap-8">
+        <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8">
           <div className="flex flex-col gap-2">
-            <span className="text-[#a31515] font-bold uppercase text-sm md:text-base tracking-[0.2em]">
+            <span className="text-[#a31515] font-bold uppercase text-xs sm:text-sm md:text-base tracking-[0.2em]">
               {ABOUT.eyebrow}
             </span>
             <h2
               ref={headRef}
-              className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight uppercase text-white"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight uppercase text-white"
             >
               ABOUT ME.
             </h2>
-            <div className="w-24 h-1.5 bg-[#a31515] rounded-full mt-2" />
+            <div className="w-20 sm:w-24 h-1.5 bg-[#a31515] rounded-full mt-2" />
           </div>
 
           <div className="relative">
             <div className="red-halo" aria-hidden="true" />
-            <div className="glass glass-panel-card relative rounded-3xl p-5 md:p-12 flex flex-col gap-5 md:gap-8">
-              <div ref={bioRef} className="flex flex-col gap-4 md:gap-5">
+            <div className="glass glass-panel-card relative rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-10 lg:p-12 flex flex-col gap-5 md:gap-8">
+              <div ref={bioRef} className="flex flex-col gap-3.5 sm:gap-4 md:gap-5">
                 {ABOUT.paragraphs.map((text, i) => (
                   <p
                     key={i}
                     className={
                       i === 0
-                        ? 'text-gray-200 text-base md:text-2xl leading-relaxed font-medium'
-                        : 'text-gray-400 text-base md:text-xl leading-relaxed'
+                        ? 'text-gray-200 text-sm sm:text-base md:text-xl lg:text-2xl leading-relaxed font-medium'
+                        : 'text-gray-400 text-xs sm:text-sm md:text-base lg:text-xl leading-relaxed'
                     }
                   >
                     {text}
@@ -247,14 +247,14 @@ export const About: React.FC = () => {
               </div>
 
               <div>
-                <h3 className="text-xs md:text-base font-bold uppercase tracking-wider text-gray-500 mb-3 md:mb-4">
+                <h3 className="text-xs md:text-base font-bold uppercase tracking-wider text-gray-500 mb-2.5 sm:mb-4">
                   Technologies
                 </h3>
                 <div ref={stackRef} className="flex flex-wrap gap-2 md:gap-3">
                   {STACK.map((tool) => (
                     <span
                       key={tool}
-                      className="tech-pill glass-chip px-3.5 py-1.5 text-xs md:px-5 md:py-2.5 md:text-lg font-bold text-gray-200 rounded-full cursor-default"
+                      className="tech-pill glass-chip px-3 py-1.5 text-xs sm:px-4 sm:py-2 md:text-base font-bold text-gray-200 rounded-full cursor-default"
                     >
                       {tool}
                     </span>
@@ -263,14 +263,14 @@ export const About: React.FC = () => {
               </div>
 
               <div>
-                <h3 className="text-xs md:text-base font-bold uppercase tracking-wider text-gray-500 mb-3 md:mb-4">
+                <h3 className="text-xs md:text-base font-bold uppercase tracking-wider text-gray-500 mb-2.5 sm:mb-4">
                   Areas of Focus
                 </h3>
                 <div className="flex flex-wrap gap-2 md:gap-3">
                   {FOCUS.map((f) => (
                     <span
                       key={f}
-                      className="px-3.5 py-1.5 text-xs md:px-4 md:py-2 md:text-base font-semibold text-red-300 rounded-full ring-1 ring-red-500/30 bg-[#a31515]/10"
+                      className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 md:text-sm font-semibold text-red-300 rounded-full ring-1 ring-red-500/30 bg-[#a31515]/10"
                     >
                       {f}
                     </span>
@@ -284,8 +284,8 @@ export const About: React.FC = () => {
         </div>
 
         {/* Right column: suspended profile card with physics swing */}
-        <div className="lg:col-span-5 flex justify-center relative lg:sticky lg:top-28">
-          <div ref={photoCardRef} data-photo-reveal={true} className="flex flex-col items-center pointer-events-auto">
+        <div className="lg:col-span-5 flex justify-center relative lg:sticky lg:top-28 w-full overflow-visible">
+          <div ref={photoCardRef} data-photo-reveal={true} className="flex flex-col items-center pointer-events-auto max-w-full">
             <HangingPhoto />
           </div>
         </div>

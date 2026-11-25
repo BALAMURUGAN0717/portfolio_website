@@ -758,20 +758,20 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
 
   const headerContent = (
     <div data-project-heading className="flex flex-col items-center text-center">
-      <span className="text-[#a31515] font-bold uppercase text-sm md:text-base tracking-[0.2em] mb-2">
+      <span className="text-[#a31515] font-bold uppercase text-xs sm:text-sm md:text-base tracking-[0.2em] mb-2">
         Featured Works
       </span>
-      <h2 className="text-5xl md:text-7xl font-black tracking-tight uppercase text-white">
+      <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight uppercase text-white">
         PROJECTS.
       </h2>
-      <div className="w-20 h-1.5 bg-[#a31515] mt-3 rounded-full" />
+      <div className="w-16 sm:w-20 h-1.5 bg-[#a31515] mt-3 rounded-full" />
     </div>
   );
 
   return fallbackMode ? (
-    <section id="projects" ref={containerRef} className="relative w-full text-gray-100 py-28 px-4 md:px-10 border-t border-white/5">
+    <section id="projects" ref={containerRef} className="relative w-full text-gray-100 py-16 sm:py-28 px-4 sm:px-6 md:px-10 border-t border-white/5">
       {headerContent}
-      <div className="max-w-7xl mx-auto mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {PORTFOLIO_PROJECTS.map((proj) => (
           <button
             key={proj.id}
@@ -780,12 +780,12 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             className="glass glass-panel-card h-auto p-0 block whitespace-normal rounded-2xl overflow-hidden text-left group hover:scale-[1.02] transition-transform duration-300"
           >
             <ProjectVideoFallback project={proj} />
-            <div className="p-5">
-              <span className="text-xs uppercase tracking-[0.2em] text-red-400 font-bold">
+            <div className="p-4 sm:p-5">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-red-400 font-bold">
                 {proj.category}
               </span>
-              <h3 className="text-xl font-black text-white mt-1">{proj.title}</h3>
-              <p className="text-gray-400 text-sm mt-1">{proj.subtitle}</p>
+              <h3 className="text-lg sm:text-xl font-black text-white mt-1">{proj.title}</h3>
+              <p className="text-gray-400 text-xs sm:text-sm mt-1">{proj.subtitle}</p>
             </div>
           </button>
         ))}
@@ -794,7 +794,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
   ) : (
     <section id="projects" ref={containerRef} className="relative w-full text-gray-100 border-t border-white/5" style={{ height: '420vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <div className="absolute inset-x-0 top-24 md:top-24 z-20 px-4 pointer-events-none">
+        <div className="absolute inset-x-0 top-16 sm:top-20 md:top-24 z-20 px-4 pointer-events-none">
           {headerContent}
         </div>
         <div ref={canvasWrapRef} className="absolute inset-0 z-10" data-no-ripple aria-label="Featured projects" role="region" />

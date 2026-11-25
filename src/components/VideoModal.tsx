@@ -182,7 +182,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose, onNavi
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs font-bold text-gray-200 hover:text-white transition-colors"
+                      className="glass-chip inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-xs font-bold text-gray-200 hover:text-white transition-colors flex-1 sm:flex-none text-center"
                     >
                       <span>View Live</span>
                       <ExternalLink className="h-3.5 w-3.5 text-red-400" />
@@ -193,7 +193,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose, onNavi
                       href={project.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs font-bold text-gray-200 hover:text-white transition-colors"
+                      className="glass-chip inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-xs font-bold text-gray-200 hover:text-white transition-colors flex-1 sm:flex-none text-center"
                     >
                       <span>View Code</span>
                       <ExternalLink className="h-3.5 w-3.5 text-red-400" />
@@ -204,7 +204,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose, onNavi
                       href={project.driveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs font-bold text-gray-200 hover:text-white transition-colors"
+                      className="glass-chip inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-xs font-bold text-gray-200 hover:text-white transition-colors flex-1 sm:flex-none text-center"
                     >
                       <span>Watch in Drive</span>
                       <ExternalLink className="h-3.5 w-3.5 text-red-400" />
@@ -213,7 +213,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose, onNavi
                   <a
                     href="#contact"
                     onClick={() => onInquire(project)}
-                    className="glass-red inline-flex items-center justify-center rounded-full px-4 sm:px-5 py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-red-950/40"
+                    className="glass-red inline-flex items-center justify-center rounded-full px-4 py-2 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-red-950/40 w-full sm:w-auto text-center"
                   >
                     {project.kind === 'software' ? 'Discuss Project' : 'Request Project'}
                   </a>

@@ -335,12 +335,12 @@ export const Hero: React.FC = () => {
       const copy = copyRef.current;
       if (!copy) return;
       if (layout.mobile) {
-        const top = layout.top + layout.height + Math.min(h * 0.02, 16);
+        const top = layout.top + layout.height + 10;
         Object.assign(copy.style, {
           left: `${layout.left}px`,
           top: `${top}px`,
           width: `${layout.width}px`,
-          height: `${Math.max(h - top - h * 0.03, 180)}px`,
+          height: `${Math.max(h - top - 16, 200)}px`,
         });
       } else {
         Object.assign(copy.style, {
@@ -575,7 +575,7 @@ export const Hero: React.FC = () => {
             className="absolute rounded-[28px] overflow-hidden border border-white/10 shadow-glass"
             style={
               mobile
-                ? { left: 'clamp(16px, 5%, 22px)', right: 'clamp(16px, 5%, 22px)', top: 'max(8.5%, 84px)', height: '50%' }
+                ? { left: 'clamp(12px, 4%, 20px)', right: 'clamp(12px, 4%, 20px)', top: 'max(7%, 74px)', height: '42%' }
                 : { left: '5.5%', right: '5.5%', top: 'max(8.5%, 96px)', bottom: '8.5%' }
             }
           >
@@ -595,47 +595,47 @@ export const Hero: React.FC = () => {
         {/* Copy layer (positioned over the glass plate by the resize handler) */}
         <div
           ref={copyRef}
-          className="absolute flex items-center max-md:items-end will-change-transform pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto"
+          className="absolute flex items-center will-change-transform pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto"
           style={
             useFallback
               ? mobile
-                ? { left: '4%', right: '4%', top: 'calc(max(8.5%, 84px) + 50% + 12px)', bottom: '3%' }
+                ? { left: '4%', right: '4%', top: 'calc(max(7%, 74px) + 42% + 10px)', bottom: '2%' }
                 : { left: '5.5%', right: '5.5%', top: 'max(8.5%, 96px)', bottom: '8.5%' }
               : { transformOrigin: '50% 50%' }
           }
         >
-          <div className="w-full h-full px-5 sm:px-8 md:px-10 lg:px-14 flex items-center max-md:items-end">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-center w-full max-md:rounded-3xl max-md:bg-gradient-to-t max-md:from-[#050507]/90 max-md:via-[#050507]/55 max-md:to-transparent max-md:p-4 max-md:pb-2">
+          <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 flex items-center max-md:items-start max-md:justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-8 xl:gap-12 items-center w-full max-md:rounded-3xl max-md:bg-gradient-to-t max-md:from-[#050507]/95 max-md:via-[#050507]/75 max-md:to-transparent max-md:p-4 max-md:pb-3 max-md:backdrop-blur-sm">
               {/* Left Column: Text Content */}
               <div className="md:col-span-7 flex flex-col justify-center min-w-0">
-                <div data-hero-copy className="flex flex-col gap-2.5 sm:gap-3.5">
-                  <span className="text-[#ff2a3b] font-bold uppercase text-[11px] sm:text-xs md:text-sm tracking-[0.25em]">
+                <div data-hero-copy className="flex flex-col gap-2 sm:gap-3.5">
+                  <span className="text-[#ff2a3b] font-bold uppercase text-[10px] sm:text-xs md:text-sm tracking-[0.16em] sm:tracking-[0.22em] break-words">
                     {HERO.eyebrow}
                   </span>
                   <h1
-                    className="text-white font-black tracking-tight leading-none uppercase drop-shadow-md whitespace-nowrap"
+                    className="text-white font-black tracking-tight leading-none uppercase drop-shadow-md break-words whitespace-normal sm:whitespace-nowrap"
                     style={{
-                      fontSize: 'clamp(1.5rem, 3.4vw, 3.6rem)',
+                      fontSize: 'clamp(1.75rem, 4.2vw, 3.8rem)',
                       letterSpacing: '-0.02em',
                     }}
                   >
                     {HERO.headline}
                   </h1>
-                  <div className="flex items-center gap-2 sm:gap-3 text-white font-extrabold text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider mt-0.5">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 text-white font-extrabold text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider mt-0.5">
                     <span>{HERO.roles[0]}</span>
                     <span className="text-[#ff2a3b] font-bold">/</span>
                     <span>{HERO.roles[1]}</span>
                   </div>
-                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-normal tracking-wide leading-relaxed max-w-xl mt-1">
+                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-normal tracking-wide leading-relaxed max-w-xl mt-0.5 sm:mt-1">
                     {HERO.tagline}
                   </p>
-                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3 sm:mt-5">
-                    <VenomButton href="#projects" variant="primary">
+                  <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 mt-2 sm:mt-4">
+                    <VenomButton href="#projects" variant="primary" className="max-w-full">
                       {HERO.primaryButton}
                     </VenomButton>
                     <a
                       href="#contact"
-                      className="glass glass-hover inline-flex items-center justify-center px-5 py-3 sm:px-7 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-200 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+                      className="glass glass-hover inline-flex items-center justify-center px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-200 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
                     >
                       {HERO.secondaryButton}
                     </a>
@@ -650,7 +650,7 @@ export const Hero: React.FC = () => {
                     <img
                       src={HERO.photo || '/media/profile.png'}
                       alt={HERO.imageAlt}
-                      className="w-full max-w-[380px] md:max-w-[440px] lg:max-w-[520px] xl:max-w-[600px] 2xl:max-w-[660px] max-h-[70vh] lg:max-h-[80vh] xl:max-h-[85vh] object-contain object-bottom drop-shadow-[0_12px_40px_rgba(220,38,38,0.28)] hover:drop-shadow-[0_16px_50px_rgba(255,42,59,0.42)] transition-all duration-500 pointer-events-auto select-none"
+                      className="w-full max-w-[280px] md:max-w-[340px] lg:max-w-[460px] xl:max-w-[560px] 2xl:max-w-[640px] max-h-[60vh] md:max-h-[65vh] lg:max-h-[75vh] xl:max-h-[82vh] object-contain object-bottom drop-shadow-[0_12px_40px_rgba(220,38,38,0.28)] hover:drop-shadow-[0_16px_50px_rgba(255,42,59,0.42)] transition-all duration-500 pointer-events-auto select-none"
                     />
                   </div>
                 </div>
