@@ -643,27 +643,15 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column: Dedicated Photo Area */}
+              {/* Right Column: Standalone Profile Photo */}
               <div className="hidden md:flex md:col-span-5 justify-center lg:justify-end items-center pointer-events-auto min-w-0">
-                <div
-                  data-hero-copy
-                  className="relative w-full max-w-[270px] lg:max-w-[320px] xl:max-w-[350px] aspect-[4/5] rounded-3xl overflow-hidden glass glass-panel-card p-2 border border-white/10 shadow-[0_0_40px_rgba(220,38,38,0.22)] group transition-all duration-500 hover:shadow-[0_0_55px_rgba(220,38,38,0.38)]"
-                >
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/60">
+                <div data-hero-copy className="w-full flex justify-center lg:justify-end items-center">
+                  <div className="relative flex justify-center lg:justify-end items-center w-full">
                     <img
                       src={HERO.photo || '/media/profile.png'}
                       alt={HERO.imageAlt}
-                      className="w-full h-full object-contain object-bottom transition-transform duration-700 group-hover:scale-105"
+                      className="w-full max-w-[380px] md:max-w-[440px] lg:max-w-[520px] xl:max-w-[600px] 2xl:max-w-[660px] max-h-[70vh] lg:max-h-[80vh] xl:max-h-[85vh] object-contain object-bottom drop-shadow-[0_12px_40px_rgba(220,38,38,0.28)] hover:drop-shadow-[0_16px_50px_rgba(255,42,59,0.42)] transition-all duration-500 pointer-events-auto select-none"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-3.5 left-4 right-4 text-left pointer-events-none">
-                      <span className="text-white text-sm md:text-base font-black uppercase tracking-wider block">
-                        {SITE.name}
-                      </span>
-                      <span className="text-red-400 text-[10px] md:text-xs uppercase font-bold tracking-widest block">
-                        {HERO.roles[0]}
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>

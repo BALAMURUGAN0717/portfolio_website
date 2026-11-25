@@ -54,7 +54,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose, onNavi
   return (
     <AnimatePresence>
       {project && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-6">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-2.5 sm:p-4 md:p-6 overflow-hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -72,136 +72,152 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose, onNavi
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.25 }}
-            className="glass glass-strong relative z-10 flex max-h-[92dvh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border-[#ff334b]/35 shadow-2xl shadow-red-950/50"
+            className="glass glass-strong relative z-10 flex max-h-[90vh] sm:max-h-[92dvh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl sm:rounded-3xl border-[#ff334b]/35 shadow-2xl shadow-red-950/50"
           >
-            <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-5 py-3.5">
-              <div className="flex min-w-0 items-center gap-3">
-                <span className="glass-chip-red shrink-0 rounded-full px-3 py-1 text-xs font-bold text-white">{project.category}</span>
-                <h3 className="truncate text-base font-bold text-white">{project.title}</h3>
+            {/* Header: Fixed at top */}
+            <div className="shrink-0 flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-4 sm:px-6 py-3 sm:py-3.5 z-20">
+              <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+                <span className="glass-chip-red shrink-0 rounded-full px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-white">
+                  {project.category}
+                </span>
+                <h3 className="truncate text-sm sm:text-base font-bold text-white">
+                  {project.title}
+                </h3>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => onNavigate(-1)}
                   aria-label="Previous project"
-                  className="glass-chip rounded-full p-2 text-gray-100 hover:text-white"
+                  className="glass-chip rounded-full p-1.5 sm:p-2 text-gray-100 hover:text-white transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
                 <button
                   type="button"
                   onClick={() => onNavigate(1)}
                   aria-label="Next project"
-                  className="glass-chip rounded-full p-2 text-gray-100 hover:text-white"
+                  className="glass-chip rounded-full p-1.5 sm:p-2 text-gray-100 hover:text-white transition-colors"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
                 <button
                   ref={closeRef}
                   type="button"
                   onClick={onClose}
                   aria-label="Close project"
-                  className="glass-chip rounded-full p-2 text-gray-200 hover:bg-red-600/60 hover:text-white"
+                  className="glass-chip rounded-full p-1.5 sm:p-2 text-gray-200 hover:bg-red-600/60 hover:text-white transition-colors"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
             </div>
 
-            <div className="relative flex aspect-video w-full items-center justify-center bg-black">
-              {project.embedUrl ? (
-                <iframe
-                  key={project.id}
-                  // YouTube links: append autoplay=1&mute=0 — Drive preview URLs pass through unchanged
-                  src={
-                    project.embedUrl.includes('youtube.com/embed')
-                      ? `${project.embedUrl}?autoplay=1&rel=0&modestbranding=1`
-                      : project.embedUrl
-                  }
-                  title={project.title}
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full border-0"
-                />
-              ) : project.videoUrl ? (
-                <video
-                  key={project.id}
-                  src={project.videoUrl}
-                  poster={project.poster}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="h-full w-full object-contain"
-                />
-              ) : project.poster ? (
-                <img
-                  key={project.id}
-                  src={project.poster}
-                  alt={`${project.title} preview`}
-                  draggable={false}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <p className="px-6 text-center text-sm text-gray-300">
-                  Preview unavailable.
-                </p>
-              )}
-            </div>
-
-            <div className="flex flex-col items-start justify-between gap-4 border-t border-white/10 bg-white/[0.04] p-5 sm:flex-row sm:items-center">
-              <div>
-                <p className="text-sm leading-relaxed text-gray-100 sm:text-base">{project.description ?? `${project.title}, ${project.subtitle}`}</p>
-                {project.tags && project.tags.length > 0 && (
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {project.tags.map((t) => (
-                      <li key={t} className="glass-chip rounded-full px-3 py-1 text-xs font-medium text-gray-100">
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
+            {/* Scrollable Content Body: Media + Details & Actions */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain flex flex-col">
+              {/* Media Preview Container with responsive max height */}
+              <div className="relative flex aspect-video w-full max-h-[38vh] sm:max-h-[44vh] md:max-h-[48vh] items-center justify-center bg-black/95 overflow-hidden shrink-0 mx-auto">
+                {project.embedUrl ? (
+                  <iframe
+                    key={project.id}
+                    // YouTube links: append autoplay=1&mute=0 — Drive preview URLs pass through unchanged
+                    src={
+                      project.embedUrl.includes('youtube.com/embed')
+                        ? `${project.embedUrl}?autoplay=1&rel=0&modestbranding=1`
+                        : project.embedUrl
+                    }
+                    title={project.title}
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  />
+                ) : project.videoUrl ? (
+                  <video
+                    key={project.id}
+                    src={project.videoUrl}
+                    poster={project.poster}
+                    controls
+                    autoPlay
+                    playsInline
+                    className="h-full w-full object-contain"
+                  />
+                ) : project.poster ? (
+                  <img
+                    key={project.id}
+                    src={project.poster}
+                    alt={`${project.title} preview`}
+                    draggable={false}
+                    className="h-full w-full object-contain select-none"
+                  />
+                ) : (
+                  <p className="px-6 text-center text-sm text-gray-300">
+                    Preview unavailable.
+                  </p>
                 )}
               </div>
-              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-                {project.liveUrl && (
+
+              {/* Information & Action Buttons Section */}
+              <div className="flex flex-col items-start justify-between gap-4 border-t border-white/10 bg-white/[0.04] p-4 sm:p-5 md:p-6 sm:flex-row sm:items-center shrink-0">
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm leading-relaxed text-gray-100 sm:text-base">
+                    {project.description ?? `${project.title}, ${project.subtitle}`}
+                  </p>
+                  {project.tags && project.tags.length > 0 && (
+                    <ul className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
+                      {project.tags.map((t) => (
+                        <li
+                          key={t}
+                          className="glass-chip rounded-full px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-medium text-gray-100"
+                        >
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 shrink-0 w-full sm:w-auto justify-start sm:justify-end">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs font-bold text-gray-200 hover:text-white transition-colors"
+                    >
+                      <span>View Live</span>
+                      <ExternalLink className="h-3.5 w-3.5 text-red-400" />
+                    </a>
+                  )}
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs font-bold text-gray-200 hover:text-white transition-colors"
+                    >
+                      <span>View Code</span>
+                      <ExternalLink className="h-3.5 w-3.5 text-red-400" />
+                    </a>
+                  )}
+                  {project.driveUrl && (
+                    <a
+                      href={project.driveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs font-bold text-gray-200 hover:text-white transition-colors"
+                    >
+                      <span>Watch in Drive</span>
+                      <ExternalLink className="h-3.5 w-3.5 text-red-400" />
+                    </a>
+                  )}
                   <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass-chip inline-flex items-center gap-1.5 rounded-full px-4 py-3 text-xs font-bold text-gray-200 hover:text-white"
+                    href="#contact"
+                    onClick={() => onInquire(project)}
+                    className="glass-red inline-flex items-center justify-center rounded-full px-4 sm:px-5 py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-red-950/40"
                   >
-                    <span>View Live</span>
-                    <ExternalLink className="h-3.5 w-3.5 text-red-400" />
+                    {project.kind === 'software' ? 'Discuss Project' : 'Request Project'}
                   </a>
-                )}
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass-chip inline-flex items-center gap-1.5 rounded-full px-4 py-3 text-xs font-bold text-gray-200 hover:text-white"
-                  >
-                    <span>View Code</span>
-                    <ExternalLink className="h-3.5 w-3.5 text-red-400" />
-                  </a>
-                )}
-                {project.driveUrl && (
-                  <a
-                    href={project.driveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass-chip inline-flex items-center gap-1.5 rounded-full px-4 py-3 text-xs font-bold text-gray-200 hover:text-white"
-                  >
-                    <span>Watch in Drive</span>
-                    <ExternalLink className="h-3.5 w-3.5 text-red-400" />
-                  </a>
-                )}
-                <a
-                  href="#contact"
-                  onClick={() => onInquire(project)}
-                  className="glass-red rounded-full px-5 py-3 text-xs font-bold uppercase tracking-wider text-white"
-                >
-                  {project.kind === 'software' ? 'Discuss Project' : 'Request Project'}
-                </a>
+                </div>
               </div>
             </div>
           </motion.div>
