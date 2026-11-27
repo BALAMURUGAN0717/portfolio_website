@@ -148,6 +148,18 @@ export const PORTFOLIO_PROJECTS: Project[] = [
     liveUrl: 'https://chickenproject-beige.vercel.app/',
   },
   {
+    id: 'animal-detection-cv',
+    kind: 'software',
+    title: 'Animal Detection – CV',
+    subtitle: 'Deep Learning Wildlife Monitoring & Alert System',
+    category: 'Computer Vision / AI',
+    poster: '/assets/thumbnails/animal-detection-1.jpg',
+    description:
+      'Developed an autonomous wildlife monitoring system with optical animal detection, real-time warning siren activation, and natural voice alerts.',
+    tags: ['Computer Vision', 'Deep Learning', 'React.js', 'Real-Time Alerts'],
+    liveUrl: 'https://animaldetection-cv.vercel.app/',
+  },
+  {
     id: 'portfolio-website',
     kind: 'software',
     title: 'Portfolio Website',
@@ -171,7 +183,61 @@ export const PORTFOLIO_PROJECTS: Project[] = [
   },
 ];
 
-/* ───────────── 8. SERVICES & PRICING ───────────── */
+/* ───────────── 8. EXPERIENCE & TRAINING ───────────── */
+export interface ExperienceItem {
+  id: string;
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  points: string[];
+  skills?: string[];
+}
+
+export const EXPERIENCE_DATA: ExperienceItem[] = [
+  {
+    id: 'exp-1',
+    role: 'React Developer Intern',
+    company: 'Krishtech Computers',
+    location: 'R.S. Puram, Coimbatore',
+    period: 'July 2026 – September 2026',
+    points: [
+      'Developed and improved UI components using React.js.',
+      'Worked with JavaScript, HTML and CSS for frontend development.',
+      'Assisted with UI improvements, coding and debugging using AI-assisted development tools.',
+    ],
+    skills: ['React.js', 'JavaScript', 'HTML', 'CSS', 'AI-assisted tools'],
+  },
+];
+
+export interface TrainingItem {
+  id: string;
+  title: string;
+  institution: string;
+  location?: string;
+  period: string;
+  points: string[];
+  skills?: string[];
+}
+
+export const TRAINING_DATA: TrainingItem[] = [
+  {
+    id: 'train-1',
+    title: 'Full Stack Python Developer Training',
+    institution: 'IDM Techpark',
+    location: 'Coimbatore',
+    period: 'August 2025 – May 2026',
+    points: [
+      'Learned frontend development using HTML, CSS, JavaScript and React.js.',
+      'Learned backend development using Python and Django.',
+      'Practiced database concepts using SQL.',
+      'Built practical web development projects as part of training.',
+    ],
+    skills: ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'React.js', 'Python', 'Django', 'SQL'],
+  },
+];
+
+/* Backwards compatibility shim */
 export interface ServiceItem {
   id: string;
   title: string;
@@ -184,9 +250,9 @@ export const SERVICES_PRICING: ServiceItem[] = [];
 
 /* ───────────── 9. HEADLINE NUMBERS (under hero) ───────────── */
 export const CLIENT_STATS = [
-  { id: 'stat-1', value: 4, suffix: '', label: 'Projects Built' },
+  { id: 'stat-1', value: 5, suffix: '', label: 'Projects Built' },
   { id: 'stat-2', value: 11, suffix: '+', label: 'Tech Stack Skills' },
-  { id: 'stat-3', value: 2, suffix: '', label: 'Live Deployed Apps' },
+  { id: 'stat-3', value: 3, suffix: '', label: 'Live Deployed Apps' },
 ] as const;
 
 /* Derived – do not edit */

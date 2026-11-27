@@ -5,7 +5,8 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 const NAV_ITEMS = [
   { label: 'Projects', href: '#projects' },
   { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Training', href: '#training' },
   { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -60,16 +61,16 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-3 sm:px-6 pt-2.5 sm:pt-4">
+    <nav className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-5 lg:px-6 pt-2.5 sm:pt-4">
       <div
-        className={`glass max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 md:px-8 flex items-center justify-between transition-all duration-300 ${
+        className={`glass max-w-7xl mx-auto rounded-2xl px-3.5 sm:px-4 md:px-4 lg:px-8 flex items-center justify-between transition-all duration-300 ${
           scrolled ? 'py-2 sm:py-2.5 !bg-[#111113]/90 shadow-lg shadow-black/40' : 'py-3 sm:py-3.5'
         }`}
       >
         {/* Brand Logo */}
         <a
           href="/"
-          className="text-white text-xl sm:text-2xl font-black tracking-tight uppercase group flex items-center shrink-0"
+          className="text-white text-lg sm:text-xl lg:text-2xl font-black tracking-tight uppercase group flex items-center shrink-0"
         >
           <span className="text-red-600 drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]">
             {SITE.name.charAt(0)}
@@ -80,13 +81,13 @@ export const Navbar: React.FC = () => {
         </a>
 
         {/* Desktop & Tablet Navigation */}
-        <div className="hidden md:flex items-center gap-4 lg:gap-8">
+        <div className="hidden md:flex items-center gap-2 lg:gap-6 xl:gap-8">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.label}
               href={item.href}
               onClick={(e) => handleLinkClick(e, item.href)}
-              className="relative text-xs lg:text-sm font-bold text-gray-400 uppercase tracking-[0.12em] lg:tracking-[0.15em] transition-colors duration-300 hover:text-white group py-1"
+              className="relative text-[11px] md:text-xs lg:text-sm font-bold text-gray-400 uppercase tracking-[0.06em] lg:tracking-[0.15em] transition-colors duration-300 hover:text-white group py-1"
             >
               {item.label}
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-red-600 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
@@ -95,12 +96,12 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Action Button & Mobile Hamburger Toggle */}
-        <div className="flex items-center gap-2.5 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <div className="hidden sm:block">
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
-              className="glass-red inline-flex items-center justify-center px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
+              className="glass-red inline-flex items-center justify-center px-3.5 py-1.5 md:px-4 lg:px-5 sm:py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
             >
               Let's Talk
             </a>
