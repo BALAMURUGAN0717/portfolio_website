@@ -242,7 +242,6 @@ export const Hero: React.FC = () => {
             px += Math.sin(t * 0.5 + b * 2.1) * 0.006;
             py += Math.cos(t * 0.4 + b * 1.3) * 0.006;
           }
-          if (isMobile) [px, py] = [py, px]; // portrait plate on phones
           return [(px - 0.5) * plateW, (0.5 - py) * plateH];
         });
 
@@ -267,8 +266,9 @@ export const Hero: React.FC = () => {
         let sy = 1;
         if (plateAspect > imgAspect) sy = imgAspect / plateAspect;
         else sx = plateAspect / imgAspect;
-        // slide the visible window so the subject stays centred when the plate is narrower than 16:9
-        const shift = sx < 1 ? Math.min(0.5, Math.max(0, (SUBJECT_X - 0.5) / (1 - sx))) : 0;
+        // Keep the atmospheric red focal point properly centered across all screen ratios
+        const focalX = isMobile ? 0.5 : SUBJECT_X;
+        const shift = sx < 1 ? Math.min(0.5, Math.max(0, (focalX - 0.5) / (1 - sx))) : 0;
         for (let i = 0; i < pos.count; i++) {
           const u = (pos.getX(i) / plateW + 0.5) * sx + (1 - sx) / 2 + shift * (1 - sx);
           const v = (pos.getY(i) / plateH + 0.5) * sy + (1 - sy) / 2;
@@ -334,22 +334,12 @@ export const Hero: React.FC = () => {
 
       const copy = copyRef.current;
       if (!copy) return;
-      if (layout.mobile) {
-        const top = layout.top + layout.height + 10;
-        Object.assign(copy.style, {
-          left: `${layout.left}px`,
-          top: `${top}px`,
-          width: `${layout.width}px`,
-          height: `${Math.max(h - top - 16, 200)}px`,
-        });
-      } else {
-        Object.assign(copy.style, {
-          left: `${layout.left}px`,
-          top: `${layout.top}px`,
-          width: `${layout.width}px`,
-          height: `${layout.height}px`,
-        });
-      }
+      Object.assign(copy.style, {
+        left: `${layout.left}px`,
+        top: `${layout.top}px`,
+        width: `${layout.width}px`,
+        height: `${layout.height}px`,
+      });
     };
     resize();
     const resizeObserver = new ResizeObserver(resize);
@@ -575,7 +565,7 @@ export const Hero: React.FC = () => {
             className="absolute rounded-[28px] overflow-hidden border border-white/10 shadow-glass"
             style={
               mobile
-                ? { left: 'clamp(12px, 4%, 20px)', right: 'clamp(12px, 4%, 20px)', top: 'max(7%, 74px)', height: '42%' }
+                ? { left: 'clamp(10px, 3%, 16px)', right: 'clamp(10px, 3%, 16px)', top: 'max(6%, 64px)', bottom: 'clamp(12px, 3%, 20px)' }
                 : { left: '5.5%', right: '5.5%', top: 'max(8.5%, 96px)', bottom: '8.5%' }
             }
           >
@@ -583,9 +573,9 @@ export const Hero: React.FC = () => {
               src={IMG_HERO_RED}
               alt={HERO.imageAlt}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: HERO.imagePosition }}
+              style={{ objectPosition: mobile ? 'center center' : HERO.imagePosition }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050507]/80 via-[#050507]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#050507]/85 via-[#050507]/45 to-transparent" />
           </div>
         )}
 
@@ -599,37 +589,50 @@ export const Hero: React.FC = () => {
           style={
             useFallback
               ? mobile
-                ? { left: '4%', right: '4%', top: 'calc(max(7%, 74px) + 42% + 10px)', bottom: '2%' }
+                ? { left: 'clamp(10px, 3%, 16px)', right: 'clamp(10px, 3%, 16px)', top: 'max(6%, 64px)', bottom: 'clamp(12px, 3%, 20px)' }
                 : { left: '5.5%', right: '5.5%', top: 'max(8.5%, 96px)', bottom: '8.5%' }
               : { transformOrigin: '50% 50%' }
           }
         >
-          <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 flex items-center max-md:items-start max-md:justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-8 xl:gap-12 items-center w-full max-md:rounded-3xl max-md:bg-gradient-to-t max-md:from-[#050507]/95 max-md:via-[#050507]/75 max-md:to-transparent max-md:p-4 max-md:pb-3 max-md:backdrop-blur-sm">
-              {/* Left Column: Text Content */}
+          <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 flex items-center justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-8 xl:gap-12 items-center w-full max-md:py-2">
+              {/* Left Column: Text Content + Mobile Profile Photo */}
               <div className="md:col-span-7 flex flex-col justify-center min-w-0">
-                <div data-hero-copy className="flex flex-col gap-2 sm:gap-3.5">
-                  <span className="text-[#ff2a3b] font-bold uppercase text-[10px] sm:text-xs md:text-sm tracking-[0.16em] sm:tracking-[0.22em] break-words">
+                <div data-hero-copy className="flex flex-col gap-2 sm:gap-3.5 items-center md:items-start text-center md:text-left">
+                  <span className="text-[#ff2a3b] font-bold uppercase text-[10px] sm:text-xs md:text-sm tracking-[0.16em] sm:tracking-[0.22em] break-words drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                     {HERO.eyebrow}
                   </span>
+
+                  {/* Mobile Profile Photo: clearly visible, proportionate and nicely illuminated (< md) */}
+                  <div className="flex md:hidden justify-center items-center w-full my-1 sm:my-2">
+                    <div className="relative flex justify-center items-center">
+                      <div className="absolute inset-0 bg-red-600/35 blur-2xl rounded-full scale-110 pointer-events-none" />
+                      <img
+                        src={HERO.photo || '/media/profile.png'}
+                        alt={HERO.imageAlt}
+                        className="relative z-10 w-auto h-auto max-w-[190px] xs:max-w-[220px] sm:max-w-[260px] max-h-[27vh] xs:max-h-[30vh] sm:max-h-[35vh] object-contain object-bottom drop-shadow-[0_14px_40px_rgba(220,38,38,0.45)] select-none transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+
                   <h1
-                    className="text-white font-black tracking-tight leading-none uppercase drop-shadow-md break-words whitespace-normal sm:whitespace-nowrap"
+                    className="text-white font-black tracking-tight leading-none uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] break-words whitespace-normal"
                     style={{
-                      fontSize: 'clamp(1.75rem, 4.2vw, 3.8rem)',
+                      fontSize: 'clamp(1.75rem, 4vw, 3.8rem)',
                       letterSpacing: '-0.02em',
                     }}
                   >
                     {HERO.headline}
                   </h1>
-                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 text-white font-extrabold text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider mt-0.5">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2.5 text-white font-extrabold text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider mt-0.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                     <span>{HERO.roles[0]}</span>
                     <span className="text-[#ff2a3b] font-bold">/</span>
                     <span>{HERO.roles[1]}</span>
                   </div>
-                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-normal tracking-wide leading-relaxed max-w-xl mt-0.5 sm:mt-1">
+                  <p className="text-gray-200 text-xs sm:text-sm md:text-base font-normal tracking-wide leading-relaxed max-w-xl mt-0.5 sm:mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     {HERO.tagline}
                   </p>
-                  <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 mt-2 sm:mt-4">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-4 mt-2 sm:mt-4">
                     <VenomButton href="#projects" variant="primary" className="max-w-full">
                       {HERO.primaryButton}
                     </VenomButton>
@@ -643,7 +646,7 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column: Standalone Profile Photo */}
+              {/* Right Column: Standalone Profile Photo (visible on md+) */}
               <div className="hidden md:flex md:col-span-5 justify-center lg:justify-end items-center pointer-events-auto min-w-0">
                 <div data-hero-copy className="w-full flex justify-center lg:justify-end items-center">
                   <div className="relative flex justify-center lg:justify-end items-center w-full">

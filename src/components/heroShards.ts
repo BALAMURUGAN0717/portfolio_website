@@ -61,10 +61,10 @@ export const clampOffset = (v: number, size: number) => {
 /** Where the glass plate sits inside the hero section (CSS px). */
 export function plateLayout(w: number, h: number) {
   const mobile = w < 768;
-  const left = mobile ? Math.min(Math.max(w * 0.04, 12), 20) : Math.min(w * 0.055, 80);
-  const top = Math.max(h * 0.08, mobile ? 74 : 96);
-  // On mobile phones, reserve balanced height for the 3D plate so copy below has ample breathing room
-  const height = mobile ? Math.min(Math.max(h * 0.42, 250), 350) : h - top - Math.max(h * 0.085, 48);
+  const left = mobile ? Math.min(Math.max(w * 0.03, 10), 16) : Math.min(w * 0.055, 80);
+  const top = Math.max(h * 0.06, mobile ? 64 : 96);
+  // Full height background plate on mobile, tablet, laptop, and desktop
+  const height = h - top - (mobile ? Math.max(h * 0.03, 16) : Math.max(h * 0.085, 48));
   return { left, top, width: w - left * 2, height, mobile };
 }
 
